@@ -93,7 +93,7 @@ A specific enterprise-tier tenant can be moved to an isolated database or schema
 
 ## 4. Packages and Feature Gating
 
-Package tiers are how LoopLab monetizes ClassConnect and how buyers get "package wise budget" customization. Treat the tier list below as a starting proposal, confirm final tiers and pricing with the founder (see HANDOVER.md, Open Questions).
+Package tiers are how LoopLab monetizes ClassConnect and how buyers get "package wise budget" customization. Treat the tier list below as a starting proposal, confirm final tiers and pricing with the founder before the first paid tenant signs.
 
 | Feature area | Starter | Growth | Pro |
 |---|---|---|---|

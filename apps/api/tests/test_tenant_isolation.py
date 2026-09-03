@@ -1,9 +1,9 @@
 """Tenant isolation and feature gating.
 
-HANDOVER.md section 2, Phase 3 calls for a tenant isolation audit that
-actively attempts cross tenant access. These are the first of those
-tests. They are deliberately adversarial: each one tries to do the thing
-the architecture forbids and asserts that it fails.
+A tenant isolation audit has to actively attempt cross tenant access
+rather than assert that the happy path works. These tests are therefore
+deliberately adversarial: each one tries to do the thing the
+architecture forbids and asserts that it fails.
 
 Run with: pytest apps/api/tests -v
 """

@@ -66,7 +66,8 @@ class Subscription(Base, TimestampMixin):
 
     Not to be confused with StudentPayment, which is a tenant charging
     its own students. Different money, different stakeholders, and by
-    rule they never share a code path (HANDOVER.md section 4).
+    rule they never share a code path: separate services, separate
+    credentials, separate screens, and never added together.
     """
 
     __tablename__ = "subscriptions"

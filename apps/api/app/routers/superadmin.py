@@ -135,8 +135,8 @@ async def onboard_tenant(
     """Sales assisted onboarding.
 
     Creates the organisation, starts a trial subscription and seeds the
-    tenant's first Admin. Self service signup is a later phase
-    (HANDOVER.md, Future Enhancements).
+    tenant's first Admin. Self service signup is the other way in, at
+    /auth/signup, which creates a free tier tenant without a salesperson.
     """
     clash = await session.execute(
         select(Organization).where(Organization.slug == body.slug)

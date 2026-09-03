@@ -1,7 +1,7 @@
 """Application settings.
 
 Environment variable names follow the LoopLab-IMS convention so ops
-stays consistent across LoopLab products (see HANDOVER.md section 4).
+stays consistent across LoopLab products.
 """
 
 from functools import lru_cache

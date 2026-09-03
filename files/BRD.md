@@ -33,7 +33,7 @@ LoopLab sells ClassConnect on tiered packages (see section 3). Each customer org
 
 ## 3. Packages
 
-Proposed starting structure, to be confirmed with the founder before pricing is finalized (see HANDOVER.md, Open Questions):
+Proposed starting structure, to be confirmed with the founder before pricing is finalized:
 
 | Feature area | Starter | Growth | Pro |
 |---|---|---|---|
@@ -266,7 +266,7 @@ Feature access (QR ticketing, analytics depth, gateway integrations) follows the
 
 ## 14. Conclusion
 
-ClassConnect becomes a multi-tenant SaaS product under LoopLab, sold on package tiers to schools, tutoring centers, and educators, with strict data isolation between tenants and package-gated features and branding. Phase 1 focuses on the tenant model, core MVP features, and basic billing, followed by analytics enhancements, deeper customization, and the design polish pass in later phases. See HANDOVER.md for the current build status and remaining work.
+ClassConnect becomes a multi-tenant SaaS product under LoopLab, sold on package tiers to schools, tutoring centers, and educators, with strict data isolation between tenants and package-gated features and branding. Phase 1 focuses on the tenant model, core MVP features, and basic billing, followed by analytics enhancements, deeper customization, and the design polish pass in later phases.
 
 **Approvals**
 

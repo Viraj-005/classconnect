@@ -154,7 +154,7 @@ export default function Subscriptions() {
               ))}
               <p className="text-2xs text-ink-500 mt-3 leading-relaxed">
                 Pricing is still provisional. Confirm the final tiers with the founder before the
-                first paid tenant signs, per HANDOVER.md.
+                first paid tenant signs.
               </p>
             </div>
           </Card>

@@ -55,12 +55,12 @@ NON_BILLING_STATUSES = ("canceled", "trialing")
 # feature is about the other money flow entirely: a tenant collecting
 # fees from its own students, which may be in any currency. Platform
 # subscriptions are not part of that, and the two must never be added
-# together (HANDOVER.md section 4).
+# together.
 #
-# Provisional. HANDOVER.md section 5 lists final tiers and pricing as an
-# open question for the founder, so this is a starting proposal: the
-# same 1 : 3.3 : 10 ladder the BRD proposed, denominated natively rather
-# than converted from a foreign figure at a guessed rate.
+# Provisional. Final tiers and pricing are the founder's call, so this
+# is a starting proposal: the same 1 : 3.3 : 10 ladder the BRD proposed,
+# denominated natively rather than converted from a foreign figure at a
+# guessed rate.
 PLATFORM_CURRENCY = "LKR"
 TIER_PRICE = {"free": 0.0, "starter": 7500.0, "growth": 25000.0, "pro": 75000.0}
 
