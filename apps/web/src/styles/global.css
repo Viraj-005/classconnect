@@ -1,0 +1,310 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/*
+  Base and component styles.
+
+  These MUST sit inside @layer base and @layer components. Tailwind v4
+  emits its utilities into @layer utilities, and in the CSS cascade an
+  unlayered rule beats every layered one. Writing a bare `h2 { color }`
+  here would therefore override `text-white` on every heading in the
+  app, silently, with no specificity warning. Keep everything layered.
+*/
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink-900);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.017em;
+    color: var(--ink-950);
+    margin: 0;
+  }
+
+  /* Focus ring, one definition, portal tinted. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--portal-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection {
+    background: var(--portal-halo);
+    color: var(--ink-950);
+  }
+
+  /* Scrollbars, so the dark Super Admin shell does not get light ones. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-200) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--ink-200);
+    border-radius: var(--radius-pill);
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-300);
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  /* Numbers in metrics should never reflow as they tick. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /*
+    Eyebrow label. Used above every metric and section title. Small caps
+    with wide tracking is what stops the dense screens from reading as a
+    wall of same size text.
+  */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+  }
+
+  /*
+    Hairline grid used by the KPI strip. Reference image 1 divides its
+    metrics with rules rather than gaps between floating cards, which
+    keeps the strip reading as one object.
+  */
+  .rule-grid > * {
+    border-right: 1px solid var(--hairline);
+  }
+  .rule-grid > *:last-child {
+    border-right: none;
+  }
+
+  .animate-rise {
+    animation: cc-rise var(--dur-med) var(--ease-out) both;
+  }
+
+  /* The two halves of a slide over. The scrim fades, the panel travels.
+     Moving both would read as one sheet sliding rather than as a layer
+     arriving over the page. */
+  .animate-fade {
+    animation: cc-fade var(--dur-med) var(--ease-out) both;
+  }
+
+  .animate-slide-in {
+    animation: cc-slide-in var(--dur-med) var(--ease-out) both;
+  }
+
+  /* Loading state as a designed screen, not an afterthought. */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--surface-sunken) 0%,
+      var(--ink-100) 45%,
+      var(--surface-sunken) 90%
+    );
+    background-size: 420px 100%;
+    animation: cc-shimmer 1.25s linear infinite;
+    border-radius: var(--radius-sm);
+  }
+
+  .pulse-ring {
+    animation: cc-pulse-ring 1.8s var(--ease-out) infinite;
+  }
+
+  /*
+    Fine grain. A flat fill on a large dark surface reads as digital and
+    cheap; a little noise gives it the density of printed ink. Rendered
+    as an inline SVG turbulence so there is no image request, and kept
+    very low opacity so it is felt rather than seen.
+  */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.32;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /*
+    Sidebar nav item. The active state is a solid light block with a
+    soft glow, not a pale tint. On a near black surface a tint reads as
+    "slightly different", which is why the old version looked washed
+    out and unfinished.
+  */
+  .sb-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    height: 2.25rem;
+    padding: 0 0.625rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--sb-fg-dim);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
+  }
+  .sb-item:hover {
+    color: var(--sb-fg);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .sb-item.is-active {
+    color: var(--sb-active-fg);
+    background: var(--sb-active-bg);
+    box-shadow: 0 0 0 1px var(--sb-glow), 0 6px 18px -6px var(--sb-glow);
+  }
+
+  /* Spine marker, so the active row also reads from the icon rail. */
+  .sb-item.is-active::before {
+    content: "";
+    position: absolute;
+    left: -0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 1.125rem;
+    border-radius: 0 3px 3px 0;
+    background: var(--sb-active-bg);
+  }
+}
+
+/* Deliberate motion, referenced against the Growly shot pacing. */
+@keyframes cc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cc-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cc-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cc-shimmer {
+  0% {
+    background-position: -420px 0;
+  }
+  100% {
+    background-position: 420px 0;
+  }
+}
+
+@keyframes cc-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 var(--portal-halo);
+  }
+  70% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+
+/* The app icon settling in on the splash. It overshoots very slightly,
+   which is what makes it read as arriving rather than appearing. */
+@keyframes cc-icon-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.82) translateY(14px);
+  }
+  62% {
+    opacity: 1;
+    transform: scale(1.03) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cc-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cc-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

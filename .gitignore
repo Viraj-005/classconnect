@@ -1,0 +1,52 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.vite/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Secrets. The .example files beside these are committed on purpose and
+# carry no real values, which is what makes them safe to publish.
+.env
+.env.*
+!.env.example
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Claude Code workspace settings. Local tooling configuration, including
+# the dev server launch config, which is specific to one machine and not
+# part of the product.
+.claude/
+
+# Local SQLite database built by scripts/seed.py. The schema lives in
+# alembic/versions, so this file is disposable and must never be committed.
+*.db
+*.db-journal
+*.sqlite3
+
+# Uploaded media. The database holds the index, this holds the bytes,
+# and the bytes are a tenant's own content, not source.
+apps/api/media/
+
+# Scratch files
+*.log
+.readme-preview.html
+_probe_*.py
+
+README.md 
+DESIGN.md 
+.files/HANDOVER.md

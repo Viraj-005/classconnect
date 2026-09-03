@@ -1,0 +1,466 @@
+/*
+  ClassConnect design tokens.
+
+  Three layers, in override order:
+    1. Base      immutable. Neutrals, spacing, radii, shadow, type scale.
+    2. Brand     tenant overridable. Set at runtime by ThemeProvider from
+                 Organization.branding_config, gated by package tier.
+    3. Portal    set per portal route. Gives Teacher, Student, Parent, Admin
+                 and Super Admin a distinct identity on the same skeleton.
+
+  No component may hardcode a hex value. Anything a tenant can re-skin has to
+  resolve through a variable, otherwise tenant branding breaks the layout later.
+*/
+
+:root {
+  /* ---------------------------------------------------------------
+     Base neutrals. Warm shifted toward plum so the product never
+     reads as default gray on white.
+     --------------------------------------------------------------- */
+  --ink-950: #17131c;
+  --ink-900: #211b28;
+  --ink-800: #2f2739;
+  --ink-700: #453b51;
+  --ink-600: #5e5270;
+  --ink-500: #7b6f8c;
+  --ink-400: #9d93aa;
+  --ink-300: #c2bacd;
+  --ink-200: #ded8e6;
+  --ink-100: #eeeaf3;
+  --ink-50: #f7f5fa;
+
+  --canvas: #faf8fc;
+  --surface: #ffffff;
+  --surface-sunken: #f4f1f8;
+  --hairline: #e8e3ee;
+
+  /* ---------------------------------------------------------------
+     Brand ramp. Default is LoopLab plum. A Growth or Pro tenant
+     overrides the mid stops and the ramp is recomputed at runtime in
+     ThemeProvider, so these values are only the fallback.
+     --------------------------------------------------------------- */
+  --brand-50: #f6f2f9;
+  --brand-100: #ece3f2;
+  --brand-200: #d9c7e5;
+  --brand-300: #bfa1d1;
+  --brand-400: #9d74b7;
+  --brand-500: #7a4b9a;
+  --brand-600: #613380;
+  --brand-700: #4f2969;
+  --brand-800: #3d2051;
+  --brand-900: #2b163a;
+  --brand-gradient: linear-gradient(135deg, #613380 0%, #7a4b9a 100%);
+  --brand-contrast: #ffffff;
+
+  /* LoopLab secondary accent. */
+  --accent-50: #f1f5f9;
+  --accent-100: #e2eaf2;
+  --accent-200: #c3d3e3;
+  --accent-300: #94b1cc;
+  --accent-400: #5c85ab;
+  --accent-500: #3c6184;
+  --accent-600: #2f4d69;
+  --accent-700: #263e54;
+
+  /* ---------------------------------------------------------------
+     Semantic. Deliberately not the default library greens and reds,
+     these are muted so they sit beside plum without vibrating.
+     --------------------------------------------------------------- */
+  --success-fg: #0b6b4f;
+  --success-mid: #12876a;
+  --success-bg: #e4f4ee;
+  --warning-fg: #8a4d10;
+  --warning-mid: #c07a26;
+  --warning-bg: #fbeedd;
+  --danger-fg: #96243a;
+  --danger-mid: #c9455c;
+  --danger-bg: #fbe7ea;
+  --info-fg: #2f4d69;
+  --info-mid: #3c6184;
+  --info-bg: #e7eef5;
+
+  /* ---------------------------------------------------------------
+     Portal identity. Overridden on the shell wrapper per portal.
+     Defaults to brand so an unscoped screen still looks correct.
+     --------------------------------------------------------------- */
+  --portal-accent: var(--brand-600);
+  --portal-accent-soft: var(--brand-100);
+  --portal-accent-hover: var(--brand-700);
+  --portal-contrast: #ffffff;
+  --portal-rail: #2b163a;
+  --portal-rail-fg: #cbbfd6;
+  --portal-halo: rgba(97, 51, 128, 0.14);
+
+
+  /* ---------------------------------------------------------------
+     Sidebar. The whole sidebar is one dark object, not a dark rail
+     glued to a white panel. Its palette is derived from the portal hue
+     at runtime, so it carries the tenant brand rather than being a
+     neutral charcoal that could belong to any product.
+     --------------------------------------------------------------- */
+  --sb-bg: #1b1024;
+  --sb-bg-deep: #150c1d;
+  --sb-bg-soft: #241531;
+  --sb-fg: #f2ecf6;
+  --sb-fg-dim: #a294ae;
+  --sb-hairline: rgba(255, 255, 255, 0.08);
+  --sb-active-bg: rgba(255, 255, 255, 0.1);
+  --sb-active-fg: #ffffff;
+  --sb-glow: rgba(255, 255, 255, 0.16);
+
+  /* ---------------------------------------------------------------
+     Chart series. Theme driven so Recharts never falls back to its
+     own defaults, and so a tenant re-skin carries into the charts.
+     --------------------------------------------------------------- */
+  --chart-1: var(--portal-accent);
+  --chart-2: #3c6184;
+  --chart-3: #12876a;
+  --chart-4: #c07a26;
+  --chart-5: #a45c8c;
+  --chart-6: #6b7ba8;
+  --chart-grid: #ece8f1;
+  --chart-axis: #9d93aa;
+
+  /* ---------------------------------------------------------------
+     Type. Space Grotesk for headings gives the product a technical
+     edge, Manrope keeps dense tables readable.
+     --------------------------------------------------------------- */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.9375rem;
+  --text-4xl: 2.5rem;
+
+  /* ---------------------------------------------------------------
+     Shape and depth. Shadows are plum tinted, not black, so cards
+     sit on the canvas instead of floating over it.
+     --------------------------------------------------------------- */
+  --radius-xs: 6px;
+  --radius-sm: 9px;
+  --radius-md: 13px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(43, 22, 58, 0.05);
+  --shadow-sm: 0 1px 3px rgba(43, 22, 58, 0.06), 0 1px 2px rgba(43, 22, 58, 0.04);
+  --shadow-md: 0 4px 14px rgba(43, 22, 58, 0.07), 0 1px 3px rgba(43, 22, 58, 0.05);
+  --shadow-lg: 0 14px 38px rgba(43, 22, 58, 0.11), 0 3px 10px rgba(43, 22, 58, 0.05);
+
+  --rail-w: 64px;
+  --nav-w: 244px;
+  --nav-w-collapsed: 0px;
+  --aside-w: 320px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 130ms;
+  --dur-med: 220ms;
+  --dur-slow: 380ms;
+}
+
+/* -----------------------------------------------------------------
+   Portal identity blocks.
+
+   The values below are only fallbacks, used before ThemeProvider has
+   run and if scripting is unavailable. At runtime every --p-* variable
+   is generated from the tenant's own brand hue (see ThemeProvider,
+   applyPortalIdentity), so portals stay mutually distinct AND follow a
+   tenant re-skin, rather than being locked to LoopLab's palette.
+   ----------------------------------------------------------------- */
+
+[data-portal="teacher"] {
+  --portal-accent: var(--p-teacher-accent, #613380);
+  --portal-accent-soft: var(--p-teacher-accent-soft, #ece3f2);
+  --portal-accent-hover: var(--p-teacher-accent-hover, #4f2969);
+  --portal-contrast: var(--p-teacher-contrast, #ffffff);
+  --portal-rail: var(--p-teacher-rail, #2b163a);
+  --portal-rail-fg: var(--p-teacher-rail-fg, #cbbfd6);
+  --portal-halo: var(--p-teacher-halo, rgba(97, 51, 128, 0.16));
+  --portal-gradient: var(
+    --p-teacher-gradient,
+    linear-gradient(135deg, #613380 0%, #7a4b9a 100%)
+  );
+  --portal-chip-contrast: var(--p-teacher-chip-contrast, var(--portal-contrast, #ffffff));
+  --sb-bg: var(--p-teacher-sb-bg, #1b1024);
+  --sb-bg-deep: var(--p-teacher-sb-bg-deep, #150c1d);
+  --sb-bg-soft: var(--p-teacher-sb-bg-soft, #241531);
+  --sb-fg: var(--p-teacher-sb-fg, #f2ecf6);
+  --sb-fg-dim: var(--p-teacher-sb-fg-dim, #a294ae);
+  --sb-active-bg: var(--p-teacher-sb-active, #bfa1d1);
+  --sb-active-fg: var(--p-teacher-sb-active-fg, #17131c);
+  --sb-glow: var(--p-teacher-sb-glow, rgba(255, 255, 255, 0.18));
+}
+
+[data-portal="student"] {
+  --portal-accent: var(--p-student-accent, #12876a);
+  --portal-accent-soft: var(--p-student-accent-soft, #e0f2eb);
+  --portal-accent-hover: var(--p-student-accent-hover, #0b6b4f);
+  --portal-contrast: var(--p-student-contrast, #ffffff);
+  --portal-rail: var(--p-student-rail, #10362e);
+  --portal-rail-fg: var(--p-student-rail-fg, #bcd6cc);
+  --portal-halo: var(--p-student-halo, rgba(18, 135, 106, 0.16));
+  --portal-gradient: var(
+    --p-student-gradient,
+    linear-gradient(135deg, #12876a 0%, #1aa886 100%)
+  );
+  --portal-chip-contrast: var(--p-student-chip-contrast, var(--portal-contrast, #ffffff));
+  --sb-bg: var(--p-student-sb-bg, #0d2620);
+  --sb-bg-deep: var(--p-student-sb-bg-deep, #091c18);
+  --sb-bg-soft: var(--p-student-sb-bg-soft, #123329);
+  --sb-fg: var(--p-student-sb-fg, #e8f4ef);
+  --sb-fg-dim: var(--p-student-sb-fg-dim, #8fb3a7);
+  --sb-active-bg: var(--p-student-sb-active, #9ed3c0);
+  --sb-active-fg: var(--p-student-sb-active-fg, #17131c);
+  --sb-glow: var(--p-student-sb-glow, rgba(255, 255, 255, 0.18));
+}
+
+[data-portal="parent"] {
+  --portal-accent: var(--p-parent-accent, #a9682a);
+  --portal-accent-soft: var(--p-parent-accent-soft, #f8ecdc);
+  --portal-accent-hover: var(--p-parent-accent-hover, #8a4d10);
+  --portal-contrast: var(--p-parent-contrast, #ffffff);
+  --portal-rail: var(--p-parent-rail, #3a2716);
+  --portal-rail-fg: var(--p-parent-rail-fg, #dbc9b3);
+  --portal-halo: var(--p-parent-halo, rgba(169, 104, 42, 0.16));
+  --portal-gradient: var(
+    --p-parent-gradient,
+    linear-gradient(135deg, #a9682a 0%, #c98436 100%)
+  );
+  --portal-chip-contrast: var(--p-parent-chip-contrast, var(--portal-contrast, #ffffff));
+  --sb-bg: var(--p-parent-sb-bg, #241a0f);
+  --sb-bg-deep: var(--p-parent-sb-bg-deep, #1a130a);
+  --sb-bg-soft: var(--p-parent-sb-bg-soft, #2f2415);
+  --sb-fg: var(--p-parent-sb-fg, #f6efe6);
+  --sb-fg-dim: var(--p-parent-sb-fg-dim, #b8a790);
+  --sb-active-bg: var(--p-parent-sb-active, #dcbf99);
+  --sb-active-fg: var(--p-parent-sb-active-fg, #17131c);
+  --sb-glow: var(--p-parent-sb-glow, rgba(255, 255, 255, 0.18));
+}
+
+[data-portal="admin"] {
+  --portal-accent: var(--p-admin-accent, #3c6184);
+  --portal-accent-soft: var(--p-admin-accent-soft, #e2eaf2);
+  --portal-accent-hover: var(--p-admin-accent-hover, #2f4d69);
+  --portal-contrast: var(--p-admin-contrast, #ffffff);
+  --portal-rail: var(--p-admin-rail, #1d2f40);
+  --portal-rail-fg: var(--p-admin-rail-fg, #b8c8d6);
+  --portal-halo: var(--p-admin-halo, rgba(60, 97, 132, 0.16));
+  --portal-gradient: var(
+    --p-admin-gradient,
+    linear-gradient(135deg, #3c6184 0%, #4e7ba5 100%)
+  );
+  --portal-chip-contrast: var(--p-admin-chip-contrast, var(--portal-contrast, #ffffff));
+  --sb-bg: var(--p-admin-sb-bg, #101f2b);
+  --sb-bg-deep: var(--p-admin-sb-bg-deep, #0b1721);
+  --sb-bg-soft: var(--p-admin-sb-bg-soft, #162c3b);
+  --sb-fg: var(--p-admin-sb-fg, #e9f0f6);
+  --sb-fg-dim: var(--p-admin-sb-fg-dim, #93a9bb);
+  --sb-active-bg: var(--p-admin-sb-active, #a3c2dc);
+  --sb-active-fg: var(--p-admin-sb-active-fg, #17131c);
+  --sb-glow: var(--p-admin-sb-glow, rgba(255, 255, 255, 0.18));
+}
+
+/*
+  Super Admin is the LoopLab platform layer, not a tenant surface.
+
+  Two rules hold here regardless of which tenant an operator is looking
+  at. First, the accent is always LoopLab plum: it never rotates with a
+  tenant's brand, because this console does not belong to any tenant.
+  Second, the shell stays visually apart from every tenant portal so an
+  operator can never mistake it for one they are supporting.
+
+  Unlike the tenant portals, this surface offers light and dark. It is
+  an operator tool used for long stretches, so the scheme is the
+  viewer's choice rather than the tenant's. Dark is the default.
+*/
+[data-portal="superadmin"] {
+  --portal-accent: var(--p-superadmin-accent, #b98cdb);
+  --portal-accent-soft: var(--p-superadmin-accent-soft, rgba(185, 140, 219, 0.16));
+  --portal-accent-hover: var(--p-superadmin-accent-hover, #cbaae7);
+  --portal-contrast: var(--p-superadmin-contrast, #17131c);
+  --portal-rail: var(--p-superadmin-rail, #120e17);
+  --portal-rail-fg: var(--p-superadmin-rail-fg, #a99cb5);
+  --portal-halo: var(--p-superadmin-halo, rgba(185, 140, 219, 0.2));
+  --portal-gradient: var(
+    --p-superadmin-gradient,
+    linear-gradient(135deg, #613380 0%, #7a4b9a 100%)
+  );
+  --portal-chip-contrast: var(--p-superadmin-chip-contrast, var(--portal-contrast, #ffffff));
+  --sb-bg: var(--p-superadmin-sb-bg, #150e1c);
+  --sb-bg-deep: var(--p-superadmin-sb-bg-deep, #100a15);
+  --sb-bg-soft: var(--p-superadmin-sb-bg-soft, #1e1428);
+  --sb-fg: var(--p-superadmin-sb-fg, #f2ecf6);
+  --sb-fg-dim: var(--p-superadmin-sb-fg-dim, #a294ae);
+  --sb-active-bg: var(--p-superadmin-sb-active, #bfa1d1);
+  --sb-active-fg: var(--p-superadmin-sb-active-fg, #17131c);
+  --sb-glow: var(--p-superadmin-sb-glow, rgba(255, 255, 255, 0.18));
+}
+
+/* Dark platform shell, the default. */
+[data-scheme="dark"] [data-portal="superadmin"] {
+  --canvas: #17131c;
+  --surface: #211b28;
+  --surface-sunken: #1a1520;
+  --hairline: #322a3c;
+
+  --ink-950: #f7f5fa;
+  --ink-900: #f1eef5;
+  --ink-800: #e2dce9;
+  --ink-700: #cdc4d6;
+  --ink-600: #b0a5bc;
+  --ink-500: #94889f;
+  --ink-400: #7b6f86;
+  --ink-300: #5d5268;
+  --ink-200: #453b4f;
+  --ink-100: #322a3c;
+  --ink-50: #262030;
+
+  --chart-grid: #2f2739;
+  --chart-axis: #7b6f86;
+  --chart-2: #7d9fc4;
+  --chart-3: #4fb894;
+  --chart-4: #d9a05c;
+  --chart-5: #c98cb0;
+
+  --success-bg: rgba(18, 135, 106, 0.18);
+  --success-fg: #7fd6b8;
+  --success-mid: #2fa583;
+  --warning-bg: rgba(192, 122, 38, 0.18);
+  --warning-fg: #e8b878;
+  --warning-mid: #d19245;
+  --danger-bg: rgba(201, 69, 92, 0.18);
+  --danger-fg: #ee9aa9;
+  --danger-mid: #d4677e;
+  --info-bg: rgba(60, 97, 132, 0.2);
+  --info-fg: #9dbcd8;
+  --info-mid: #5a86ad;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 14px 38px rgba(0, 0, 0, 0.45);
+}
+
+/*
+  Light platform shell. Not the tenant canvas reused: it is tinted
+  toward plum and a touch cooler, so a screenshot of the platform
+  console in light mode is still not mistakable for a tenant portal.
+*/
+[data-scheme="light"] [data-portal="superadmin"] {
+  --canvas: #f7f4fa;
+  --surface: #ffffff;
+  --surface-sunken: #f2edf7;
+  --hairline: #e5dcee;
+
+  --ink-950: #17131c;
+  --ink-900: #211b28;
+  --ink-800: #2f2739;
+  --ink-700: #453b51;
+  --ink-600: #5e5270;
+  --ink-500: #7b6f8c;
+  --ink-400: #9d93aa;
+  --ink-300: #c2bacd;
+  --ink-200: #ded8e6;
+  --ink-100: #eeeaf3;
+  --ink-50: #f7f5fa;
+
+  --chart-grid: #ece3f3;
+  --chart-axis: #9d93aa;
+}
+
+/* Map tokens into Tailwind utilities. */
+@theme inline {
+  --color-ink-950: var(--ink-950);
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-ink-600: var(--ink-600);
+  --color-ink-500: var(--ink-500);
+  --color-ink-400: var(--ink-400);
+  --color-ink-300: var(--ink-300);
+  --color-ink-200: var(--ink-200);
+  --color-ink-100: var(--ink-100);
+  --color-ink-50: var(--ink-50);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--surface-sunken);
+  --color-hairline: var(--hairline);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+
+  --color-portal: var(--portal-accent);
+  --color-portal-soft: var(--portal-accent-soft);
+  --color-portal-hover: var(--portal-accent-hover);
+  --color-portal-contrast: var(--portal-contrast);
+  --color-rail: var(--portal-rail);
+  --color-rail-fg: var(--portal-rail-fg);
+  --color-sb: var(--sb-bg);
+  --color-sb-deep: var(--sb-bg-deep);
+  --color-sb-soft: var(--sb-bg-soft);
+  --color-sb-fg: var(--sb-fg);
+  --color-sb-dim: var(--sb-fg-dim);
+  --color-sb-line: var(--sb-hairline);
+  --color-sb-active: var(--sb-active-bg);
+
+  --color-success: var(--success-mid);
+  --color-success-fg: var(--success-fg);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning-mid);
+  --color-warning-fg: var(--warning-fg);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger-mid);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info-mid);
+  --color-info-fg: var(--info-fg);
+  --color-info-bg: var(--info-bg);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+
+  --text-2xs: var(--text-2xs);
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+}
