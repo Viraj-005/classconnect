@@ -18,9 +18,6 @@ with each organisation fully isolated from the next.
 
 <br>
 
-> Style rule for this repo: no em dashes in code, comments or documentation. Use commas,
-> periods or parentheses instead.
-
 ## The two marks
 
 These are different things and the codebase keeps them apart deliberately, because
