@@ -27,11 +27,6 @@ Thumbs.db
 .vscode/
 *.swp
 
-# Claude Code workspace settings. Local tooling configuration, including
-# the dev server launch config, which is specific to one machine and not
-# part of the product.
-.claude/
-
 # Local SQLite database built by scripts/seed.py. The schema lives in
 # alembic/versions, so this file is disposable and must never be committed.
 *.db
