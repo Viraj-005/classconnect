@@ -42,3 +42,8 @@ apps/api/media/
 .readme-preview.html
 _probe_*.py
 
+# Internal documents. Kept locally, not published: the handover carries
+# commercial open questions and a phase plan, and the design document is
+# working material rather than product.
+DESIGN.md
+files/HANDOVER.md

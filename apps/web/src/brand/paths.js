@@ -8,9 +8,9 @@
   and made the mark recolourable, so the same file serves the purple
   lockup on the login screen and the white one in the sidebar.
 
-  Generated, not hand written. Do not edit these strings. The tracer and
-  its fidelity check live alongside the design notes in DESIGN.md
-  section 13.
+  Generated, not hand written. Do not edit these strings. The tracer
+  and its fidelity check are in scripts/brand/, and rerunning them
+  reproduces this file byte for byte.
 
   Every path is filled even-odd, which is what carves the counters in
   the wordmark and the halo around the node out of the page shapes.

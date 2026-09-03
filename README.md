@@ -122,7 +122,6 @@ The named classes this was built against, and where each is answered.
 |---|---|
 | [files/BRD.md](./files/BRD.md) | Business requirements, packages, roles, workflows |
 | [files/ARCHITECTURE.md](./files/ARCHITECTURE.md) | System design, multi-tenancy, data model, UI direction |
-| [DESIGN.md](./DESIGN.md) | Design system, research synthesis, token architecture |
 
 ## Layout
 
@@ -320,7 +319,8 @@ nothing has drifted.
 
 The artwork is traced to vector rather than used as-is because the delivered JPEGs have no
 alpha, and the mark has to sit on a near black sidebar, a tenant coloured login panel and
-a white form. See DESIGN.md section 13. Do not edit `paths.js` by hand.
+a white form. Tracing gives a shape that takes its colour from the surface it sits on,
+which a flattened JPEG cannot. Do not edit `paths.js` by hand.
 
 ## Migrations
 
