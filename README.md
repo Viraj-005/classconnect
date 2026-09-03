@@ -2,6 +2,7 @@
 
 <img src="./brand/product/classconnect-logo.svg" alt="ClassConnect" width="440">
 <br>
+<br>
 
 **Multi-tenant SaaS Learning Management System**
 
