@@ -9,8 +9,8 @@ with each organisation fully isolated from the next.
 
 <br>
 
-<sub>A product of</sub><br>
-<img src="./brand/company/looplab-logo.jpg" alt="LoopLab" width="120">
+<sub>A product of</sub><br><br>
+<img src="./brand/company/looplab-logo.png" alt="LoopLab" width="120">
 
 </div>
 
@@ -27,7 +27,7 @@ conflating them is a bug that already happened once.
 | | Mark | Whose | Changeable |
 |---|---|---|---|
 | <img src="./brand/product/classconnect-icon.svg" width="40"> | **ClassConnect** | The product | No. It ships with the build |
-| <img src="./brand/company/looplab-logo.jpg" width="40"> | **LoopLab** | The company operating the instance | Yes, uploaded at `/platform/branding` |
+| <img src="./brand/company/looplab-logo.png" width="40"> | **LoopLab** | The company operating the instance | Yes, uploaded at `/platform/branding` |
 
 The product mark is the name of the software, not of anyone running it. It is also what
 lets an operator with two tabs open tell the platform console from a tenant, so a Super
